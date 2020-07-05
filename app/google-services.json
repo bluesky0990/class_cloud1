@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "437387905639",
+    "firebase_url": "https://fir-with-android-9a18f.firebaseio.com",
+    "project_id": "fir-with-android-9a18f",
+    "storage_bucket": "fir-with-android-9a18f.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:437387905639:android:e901870ff5228f8d28e2c2",
+        "android_client_info": {
+          "package_name": "com.nellem.cloud1"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "437387905639-9ll7lirrm63k1hj4u1tj57g70mphpgu6.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDgw30trD4zDdkOazwC5W0qWrontZYiw8I"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "437387905639-9ll7lirrm63k1hj4u1tj57g70mphpgu6.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
