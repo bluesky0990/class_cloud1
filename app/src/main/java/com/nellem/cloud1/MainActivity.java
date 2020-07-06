@@ -6,6 +6,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -17,7 +18,6 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
-import com.google.firebase.database.core.view.View;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -42,6 +42,14 @@ public class MainActivity extends AppCompatActivity {
         btnPut = (Button)findViewById(R.id.btnPut);
         btnGet = (Button)findViewById(R.id.btnGet);
 
+        textView2.setOnClickListener(new View.OnClickListener() {
+            String tmp = textView2.getText().toString();
+            @Override
+            public void onClick(View view) {
+                Toast.makeText(getApplicationContext(), tmp, Toast.LENGTH_SHORT).show();
+            }
+        });
+
         myRef.addChildEventListener(new ChildEventListener() {
             @Override
             public void onChildAdded(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
@@ -49,14 +57,14 @@ public class MainActivity extends AppCompatActivity {
                 //textView.append(data.toString() + "\n");
                 data = data.replaceAll("\\{", "");
                 data = data.replaceAll("\\}", "");
-                data = data.replaceAll("time=", "");
+                data = data.replaceAll("date=", "");
                 data = data.replaceAll("temperature=", "");
                 data = data.replaceAll("humidity=", "");
                 String[] sResult = data.split(",");
 
-                textView.setText("데이터 갱신 시각 : " + sResult[2]);
-                textView2.setText(sResult[0] + "℃");
-                textView3.setText(sResult[1] + "%");
+                textView.setText(sResult[0]);
+                textView2.setText(sResult[1] + "℃");
+                textView3.setText(sResult[2] + "%");
             }
 
             @Override
