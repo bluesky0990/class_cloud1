@@ -9,6 +9,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -28,9 +29,8 @@ public class MainActivity extends AppCompatActivity {
     DatabaseReference myRef = db.getReference ("logDHT");
 //    DatabaseReference myRef = db.getReference ();
 
-    TextView textView, textView2, textView3;
-    EditText editText;
-    Button btnPut, btnGet;
+    ListView list;
+    LvAdapter adapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,20 +38,9 @@ public class MainActivity extends AppCompatActivity {
         setContentView (R.layout.activity_main);
         setTitle ("addChildEvent");
 
-        textView = (TextView) findViewById (R.id.textView);
-        textView2 = (TextView) findViewById (R.id.textView2);
-        textView3 = (TextView) findViewById (R.id.textView3);
-        editText = (EditText)findViewById(R.id.inputText);
-        btnPut = (Button)findViewById(R.id.btnPut);
-        btnGet = (Button)findViewById(R.id.btnGet);
-
-        textView2.setOnClickListener(new View.OnClickListener() {
-            String tmp = textView2.getText().toString();
-            @Override
-            public void onClick(View view) {
-                Toast.makeText(getApplicationContext(), tmp, Toast.LENGTH_SHORT).show();
-            }
-        });
+        list = (ListView)findViewById(R.id.LvItem);
+        adapter = new LvAdapter();
+        list.setAdapter(adapter);
 
         myRef.addChildEventListener(new ChildEventListener() {
             @Override
@@ -62,9 +51,8 @@ public class MainActivity extends AppCompatActivity {
                 String te = dataDict.get("temperature").toString();
                 String ti = dataDict.get("date").toString();
 
-                textView.setText(ti);
-                textView2.setText(te + "℃");
-                textView3.setText(hu + "%");
+                adapter.addItem(ti, te + "℃", hu + "%");
+                adapter.notifyDataSetChanged();
             }
 
             @Override
@@ -81,24 +69,6 @@ public class MainActivity extends AppCompatActivity {
 
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
-            }
-        });
-
-        btnPut.setOnClickListener(new android.view.View.OnClickListener() {
-            @Override
-            public void onClick(android.view.View view) {
-                String inData = editText.getText().toString ();
-
-                // Firebase에 key에 대한 value 저장
-                //myRef.setValue(inData);
-                myRef.push().child("test").setValue(inData);
-                editText.setText ("");
-            }
-        });
-        btnGet.setOnClickListener(new android.view.View.OnClickListener() {
-            @Override
-            public void onClick(android.view.View view) {
-
             }
         });
     }
