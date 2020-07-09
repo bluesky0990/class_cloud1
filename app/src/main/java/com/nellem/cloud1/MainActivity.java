@@ -45,14 +45,20 @@ public class MainActivity extends AppCompatActivity {
         myRef.addChildEventListener(new ChildEventListener() {
             @Override
             public void onChildAdded(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
-                Map<String, Object> dataDict = new HashMap<>();
-                dataDict = (Map<String, Object>) snapshot.getValue();
-                String hu = dataDict.get("humidity").toString();
-                String te = dataDict.get("temperature").toString();
-                String ti = dataDict.get("date").toString();
-
-                adapter.addItem(ti, te + "℃", hu + "%");
+                String data1 = snapshot.child("humidity").getValue().toString();
+                String data2 = snapshot.child("temperature").getValue().toString();
+                String data3 = snapshot.child("date").getValue().toString();
+                adapter.addItem(data3, data1 + "℃", data2 + "%");
                 adapter.notifyDataSetChanged();
+
+//                Map<String, Object> dataDict = new HashMap<>();
+//                dataDict = (Map<String, Object>) snapshot.getValue();
+//                String hu = dataDict.get("humidity").toString();
+//                String te = dataDict.get("temperature").toString();
+//                String ti = dataDict.get("date").toString();
+//
+//                adapter.addItem(ti, te + "℃", hu + "%");
+//                adapter.notifyDataSetChanged();
             }
 
             @Override
