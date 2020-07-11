@@ -25,10 +25,11 @@ import java.util.Map;
 
 public class MainActivity extends AppCompatActivity {
 
+    // 데이터베이스 구성
     FirebaseDatabase db = FirebaseDatabase.getInstance ();
     DatabaseReference myRef = db.getReference ("logDHT");
-//    DatabaseReference myRef = db.getReference ();
 
+    // 커스텀리스트뷰 구성
     ListView list;
     LvAdapter adapter;
 
@@ -36,15 +37,20 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate (savedInstanceState);
         setContentView (R.layout.activity_main);
-        setTitle ("addChildEvent");
+        setTitle ("addChildEvent"); // 타이틀바 메세지 변경
 
+        // 커스텀리스트뷰 생성
         list = (ListView)findViewById(R.id.LvItem);
         adapter = new LvAdapter();
         list.setAdapter(adapter);
 
+        // 데이터베이스의 값 변경 시 이벤트 발생
         myRef.addChildEventListener(new ChildEventListener() {
+
+            //  값이 추가 될 때마다 실행
             @Override
             public void onChildAdded(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
+                //  스냅샷으로 부터 생성 된 값을 String에 대입, 이 후 커스텀리스트뷰 어댑터에 추가
                 String data1 = snapshot.child("humidity").getValue().toString();
                 String data2 = snapshot.child("temperature").getValue().toString();
                 String data3 = snapshot.child("date").getValue().toString();
