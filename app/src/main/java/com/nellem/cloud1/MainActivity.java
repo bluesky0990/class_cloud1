@@ -51,8 +51,8 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onChildAdded(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
                 //  스냅샷으로 부터 생성 된 값을 String에 대입, 이 후 커스텀리스트뷰 어댑터에 추가
-                String data1 = snapshot.child("humidity").getValue().toString();
-                String data2 = snapshot.child("temperature").getValue().toString();
+                String data1 = snapshot.child("temperature").getValue().toString();
+                String data2 = snapshot.child("humidity").getValue().toString();
                 String data3 = snapshot.child("date").getValue().toString();
                 adapter.addItem(data3, data1 + "℃", data2 + "%");
                 adapter.notifyDataSetChanged();
